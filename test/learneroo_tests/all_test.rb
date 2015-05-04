@@ -8,17 +8,17 @@ class ControllersTest < ActionController::TestCase
 	end
 
 	def setup
-		@prod1 = Product.create(name: "Cow", price: 10)
-		@prod2 = Product.create(name: "Pencil", price: 2)
+		if Product.column_names.include?("quantity")
+			@prod1 = Product.create(name: "Cow", price: 10, quantity: 1)
+			@prod2 = Product.create(name: "Pencil", price: 2, quantity: 2)
+		else
+			@prod1 = Product.create(name: "Cow", price: 10)
+			@prod2 = Product.create(name: "Pencil", price: 2)
+		end
 	end
 
 	def teardown
 		Product.delete_all
-	end
-
-	def setup_quantity
-		@prod1.update(quantity: 1)
-		@prod2.update(quantity: 2)
 	end
 
 	## Product Test
@@ -54,6 +54,11 @@ class ControllersTest < ActionController::TestCase
 	test "06 should save product with name and price" do
 		product = Product.new(name: "Pen", price: 5)
 		assert product.save
+	end
+
+	test "06b should not save product with negative price" do
+		product = Product.new(name: "Pen", quantity: 1, price: -1)
+		assert_not product.save
 	end
 
 	test "07 products should have quantity" do
@@ -92,27 +97,10 @@ class ControllersTest < ActionController::TestCase
 		assert_equal(Product.oldest, @prod1)
 	end
 
-	test "13 should not save product with negative price" do
-		product = Product.new(name: "Pen", quantity: 1, price: -1)
-		assert_not product.save
-	end
-
-	test "14 should not save product with negative quantity" do
-		product = Product.new(name: "Pen", quantity: -1, price: 5)
-		assert_not product.save
-	end
-
-	test "15 should save product with positive quantity and price" do
-		product = Product.new(name: "Pen", quantity: 1, price: 5)
-		assert product.save
-	end
-
-
 	## StoreController Tests
 
 	def setup_store
 		@controller = StoreController.new
-		setup_quantity
 	end
 
 	### Routes to Views
@@ -207,7 +195,6 @@ class ControllersTest < ActionController::TestCase
 	## ProductsController Tests
 
 	def setup_products
-		setup_quantity
 		@controller = ProductsController.new
 	end
 
@@ -261,7 +248,6 @@ class ControllersTest < ActionController::TestCase
 
 	# Home page too!
 	test "48 home page should display product link" do
-		setup_quantity
 		newest = Product.create(name: "NewProd", price: 1, quantity: 1)
 		@controller = StoreController.new
 		get :home
@@ -302,8 +288,6 @@ class ControllersTest < ActionController::TestCase
 	## Categories Tests
 
 	def setup_categories
-		setup_quantity
-
 		@controller = CategoriesController.new
 		@category = Category.create(name: "Animals")
 	end
@@ -370,10 +354,10 @@ class ControllersTest < ActionController::TestCase
 	test "58 display product price" do
 		setup_products
 		products = Product.available
-		 get :index
-		 products.each do |product|
-			 assert_match "$#{product.price.to_s}", response.body
-		 end
+		get :index
+		products.each do |product|
+			assert_match "$#{product.price.to_s}", response.body
+		end
 	end
 
 end
