@@ -22,5 +22,8 @@ module TheAutomatedStore
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Prevent automatic test generation
+    config.generators.test_framework false
   end
 end
