@@ -15,5 +15,5 @@ products = Product.create([
                         ])
                         
 products.each do |product|
-  product.uptdate_attribute(:quantity, 5)
+  product.update_attribute(:quantity, 5)
 end
