@@ -1,2 +1,17 @@
-<h1>Automated Store</h1>
-<p>You will be able to buy great things in this store.</p>
+<div class="row">
+  <div class="three columns">
+    <h3>Explore Products</h3>
+    <ul>
+      <% @categories.each do |category| %>
+        <li><%= link_to category.name, category %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="nine columns">
+    <h1><%= @title %></h1>
+    <em>New: </em>
+    <b><%= link_to @new.name, @new %></b>
+    <p><%= @new.description %></p>
+    <%= link_to "Browse All Products", products_path, class: "button" %>
+   </div>
+</div>

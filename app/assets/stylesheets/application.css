@@ -10,6 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require skeleton
  *= require_tree .
  *= require_self
  */
+.navbar {
+  padding:8px;
+  border-bottom:solid;
+}
+.navbar ul{
+  height:20px;
+}
+.navbar li {
+  display: inline-block;
+  list-style: none;
+}
+.navbar li a {
+  text-decoration:none;
+}

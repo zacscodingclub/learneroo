@@ -1,0 +1,6 @@
+<% if @product.category %>
+  <small><%= link_to @product.category.name, @product.category %></small>
+<% end %>
+<h1><%= @title %></h1>
+<p><%= @product.description %></p>
+<b>$<%= @product.price %></b>
