@@ -25,6 +25,8 @@ gem 'devise'
 
 gem 'rollbar', '~> 1.5.3'# Use ActiveModel has_secure_password
 
+gem 'rails_admin', '~> 0.6.7'
+
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server

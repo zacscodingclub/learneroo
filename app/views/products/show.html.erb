@@ -2,5 +2,6 @@
   <small><%= link_to @product.category.name, @product.category %></small>
 <% end %>
 <h1><%= @title %></h1>
+<%= image_tag @product.image_url, class: "product-show-image" %>
 <p><%= @product.description %></p>
 <b>$<%= @product.price %></b>

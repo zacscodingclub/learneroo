@@ -21,7 +21,7 @@ class Product < ActiveRecord::Base
     Product.order(:created_at).first
   end
   
-  def sold_out
+  def self.sold_out
     Product.where(quantity: 0)
   end
 end
