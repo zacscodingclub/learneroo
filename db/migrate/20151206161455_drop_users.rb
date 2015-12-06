@@ -1,5 +1,7 @@
 class DropUsers < ActiveRecord::Migration
   def change
-    drop_table(:users)
+    if table_exists?(:users)
+      drop_table(:users)
+    end
   end
 end
