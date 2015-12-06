@@ -1,0 +1,23 @@
+.alert {
+  background-color: #f45252;
+}
+
+.notice{
+  background-color: #bef0ff;
+}
+
+.alert, .notice{
+  margin-top: 5px;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#error_explanation{
+  color: red;
+  h2 {
+    font-size: 1.4em;
+  }
+  ul{
+    list-style-type: none;
+  }
+}
