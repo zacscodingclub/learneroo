@@ -1,0 +1,16 @@
+<br>
+<% if !user_signed_in? %>
+  <small><%= link_to "Sign in", user_session_path %> to like products.</small>
+<% elsif current_user.likes?(@product) %>
+  <% like = current_user.likes.find_by(product_id: @product.id) %>
+  <%= form_tag(like, method: :delete) do %>
+    <%= hidden_field_tag :product_id, @product.id %>
+    <%= submit_tag "Unlike" %>
+  <% end %>
+<% else %>
+  <%= form_tag "/likes" do %>
+    <%= hidden_field_tag :product_id, @product.id %>
+    <%= submit_tag "Like", class:"button-primary" %>
+  <% end %>
+<% end %>
+<p><%= @product.likes.size %> users like this.</p>

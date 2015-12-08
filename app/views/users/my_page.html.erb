@@ -1,0 +1,11 @@
+<h2>Liked Products</h2>
+
+<%= render current_user.liked_products %>
+
+<hr>
+<h3>Account Info</h3>
+<p>You are logged in as <strong><%= current_user.email %></strong>.</p>
+<ul>
+  <li><%= link_to "Edit", edit_user_registration_path, class: "button" %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button" %></li>
+</ul>

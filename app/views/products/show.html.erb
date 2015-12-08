@@ -5,3 +5,4 @@
 <%= image_tag @product.image_url, class: "product-show-image" %>
 <p><%= @product.description %></p>
 <b>$<%= @product.price %></b>
+<%= render '/likes/form' %>
